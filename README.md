@@ -1,26 +1,38 @@
-# 🧮 Calculator App - Solidity Smart Contract
+# 🧮 Calculator App: EVM Arithmetic & Logic Encapsulation
 
-Welcome to the first project of my **Master in Blockchain Development** portfolio at the **Blockchain Accelerator Academy**.
+A robust smart contract implementation exploring arithmetic operations within the EVM, focusing on gas-efficient validation patterns and strict type safety.
 
-As a **Java Software Engineer** transitioning into the Web3 space, I am documenting my journey by building smart contracts that explore the depths of the Ethereum Virtual Machine (EVM). This repository contains a robust **Calculator Smart Contract** that goes beyond simple arithmetic to implement on-chain constraints and validations.
+## 🚀 Engineering Context
+
+As a **Java Software Engineer**, arithmetic operations are typically abstracted away by the JVM. In **Solidity**, however, mathematical operations require rigorous attention to **Gas Consumption** and **Type Safety** (Signed vs. Unsigned integers).
+
+This project focuses on the architectural differences in error handling: moving from Java's runtime exception model (`try/catch`) to Solidity's "Fail Early" pattern using **Modifiers**, ensuring transactions revert before consuming execution gas on invalid inputs.
 
 ## 💡 Project Overview
 
-The **Calculator App** is a smart contract that performs addition, subtraction, multiplication, division, and exponentiation. The key challenge here was not the math itself, but handling it efficiently within the EVM context.
+The **Calculator App** handles core mathematical operations (addition, subtraction, multiplication, division, and power) with enforced constraints.
 
 ### 🔍 Key Technical Features:
 
-* **Custom Modifiers:** Implemented `checkMaxPowerNumber` and `checkNotZero` to handle input validation cleanly. Unlike Java's exception handling, these modifiers ensure gas isn't wasted on invalid operations before execution starts.
-* **Signed vs. Unsigned Integers:** The contract explicitly handles `uint256` and `int256` to support negative results in subtraction and division, a crucial distinction in Solidity.
-* **Internal Logic Separation:** Usage of `internal` functions (like `substraction_logic`) to keep the public interface clean and secure.
-* **Event Logging:** Emitted `Addition` and `Substraction` events, allowing off-chain applications (front-ends) to listen for state changes.
+* **Declarative Validation (Modifiers):**
+    * Implemented `checkMaxPowerNumber` and `checkNotZero` to decouple validation logic from business logic.
+    * *Comparison:* This functions similarly to **Aspect-Oriented Programming (AOP)** or custom annotations in Java/Spring, allowing for cleaner code reuse and ensuring gas isn't wasted on invalid operations.
+
+* **Type Safety (Int256 vs Uint256):**
+    * Explicit handling of signed integers (`int256`) to support negative results in subtraction and division, addressing specific EVM storage slot behaviors that differ from standard Java primitives.
+
+* **Encapsulation & Visibility:**
+    * Strict separation of public entry points and internal logic (e.g., `substraction_logic`) to maintain a secure API surface, mirroring Java's `private`/`protected` encapsulation principles.
+
+* **Observability (Events):**
+    * Emission of `Addition` and `Substraction` events to enable asynchronous state tracking by off-chain indexers.
 
 ## 🛠️ Stack & Tools
 
-* **Language:** Solidity `^0.8.24`
-* **License:** LGPL-3.0-only
-* **Concepts Applied:** Modifiers, Event emission, Visibility (Public/Internal/Pure), and Error handling.
+* **Language:** Solidity `^0.8.24`.
+* **Concepts:** Modifiers, Visibility Specifiers, Event Logging.
+* **License:** LGPL-3.0-only.
 
 ---
 
-*This project marks the beginning of my specialized training in Blockchain architecture.*
+*This project demonstrates low-level arithmetic handling and logic encapsulation on the Ethereum blockchain.*
